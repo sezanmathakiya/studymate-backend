@@ -1,390 +1,213 @@
-\# StudyMate Backend — REST API
+# StudyMate Backend API
 
+A RESTful backend API for **StudyMate**, an AI-powered student study and task management application. It provides authentication, subject and task management, study file storage, progress tracking, and AI-powered study assistance.
 
+## 🌐 Project Links
 
-The backend for \*\*StudyMate – Student Study \& Task Management System\*\*. It provides server-side functionality for the frontend, including API handling, database integration, authentication, file storage, and study reminders.
+- **Frontend:** https://github.com/sezanmathakiya/studymate-frontend
+- **Backend Repository:** https://github.com/sezanmathakiya/studymate-backend
+- **Live Application:** https://studymate-frontend-rgh9.onrender.com
+- **Backend API:** https://studymate-backend-1-izz3.onrender.com
 
+## ✨ Features
 
+- **Authentication:** User signup and login with JWT authentication and bcrypt password hashing.
+- **Subject Management:** Create, retrieve, update, and delete subjects.
+- **Task Management:** Manage tasks with descriptions, priorities, statuses, due dates, and subject associations.
+- **Progress Tracking:** Overall progress, subject-wise progress, and recent activity statistics.
+- **Study File Management:** Upload, retrieve, and delete study materials using Cloudinary.
+- **AI Study Assistant:** Generate educational responses using the Google Gemini API.
+- **Email Reminders:** Scheduled study reminder functionality.
+- **User Data Isolation:** Scope subject, task, and file operations to the authenticated user.
+- **API Protection:** Authentication middleware, request rate limiting, request validation, and Helmet security headers.
 
-\## 🌐 Project Links
+## 🛠️ Tech Stack
 
+| Technology | Purpose |
+|---|---|
+| Node.js | JavaScript runtime |
+| Express.js | REST API framework |
+| MongoDB | Database |
+| Mongoose | MongoDB object modeling |
+| JWT | Authentication |
+| bcryptjs | Password hashing |
+| express-validator | Request validation |
+| express-rate-limit | Rate limiting |
+| Helmet | HTTP security headers |
+| Google Gemini API | AI-powered study assistance |
+| Multer | File upload handling |
+| Cloudinary | Cloud file storage |
+| node-cron / project cron module | Scheduled reminders |
+| dotenv | Environment configuration |
 
-
-\- \*\*Live Frontend:\*\* https://studymate-frontend-rgh9.onrender.com/
-
-\- \*\*Frontend Repository:\*\* https://github.com/sezanmathakiya/studymate-frontend
-
-\- \*\*Backend Repository:\*\* https://github.com/sezanmathakiya/studymate-backend
-
-
-
-\## 🛠️ Technology Stack
-
-
-
-\- \*\*Runtime:\*\* Node.js
-
-\- \*\*Server Framework:\*\* Express.js 5
-
-\- \*\*Database:\*\* MongoDB Atlas
-
-\- \*\*ODM:\*\* Mongoose
-
-\- \*\*Authentication:\*\* JSON Web Token (JWT)
-
-\- \*\*Password Hashing:\*\* bcryptjs
-
-\- \*\*Validation:\*\* express-validator
-
-\- \*\*Security:\*\* Helmet, express-rate-limit
-
-\- \*\*File Uploads:\*\* Multer
-
-\- \*\*Cloud Storage:\*\* Cloudinary
-
-\- \*\*Email:\*\* Nodemailer
-
-\- \*\*Scheduled Jobs:\*\* node-cron
-
-\- \*\*Environment Configuration:\*\* dotenv
-
-
-
-\## ✨ Main Responsibilities
-
-
-
-The backend supports the StudyMate application through server-side functionality such as:
-
-
-
-\- User authentication
-
-\- Subject and task management APIs
-
-\- Study progress and data management
-
-\- Study file upload processing
-
-\- Database operations
-
-\- Email reminders and scheduled jobs
-
-\- Request validation and security middleware
-
-
-
-Confirm individual endpoints and workflows against the current source code before documenting them as verified features.
-
-
-
-\## 🏗️ Project Structure
-
-
+## 📁 Project Structure
 
 ```text
-
-backend/
-
+studymate-backend/
 ├── config/
-
+│   └── cloudinary.js
 ├── controller/
-
-├── cron/
-
+│   ├── ai.controller.js
+│   ├── file.controller.js
+│   ├── subject.controller.js
+│   ├── task.controller.js
+│   └── user.controller.js
 ├── middleware/
-
+│   ├── auth.middleware.js
+│   ├── error.middleware.js
+│   ├── notFound.middleware.js
+│   ├── upload.middleware.js
+│   └── validation.middleware.js
 ├── model/
-
 ├── route/
-
-├── service/
-
-├── src/
-
-├── .env
-
-├── .gitignore
-
+│   ├── ai.route.js
+│   ├── file.route.js
+│   ├── subject.route.js
+│   ├── task.route.js
+│   └── user.route.js
+├── cron/
+│   └── reminder.cron.js
 ├── index.js
-
 ├── package.json
-
-└── package-lock.json
-
+└── .gitignore
 ```
 
+*Note: This structure highlights the main files; your repository may contain additional files.*
 
+## ⚙️ Getting Started
 
-\### Directory Overview
+### Prerequisites
 
+- Node.js and npm
+- MongoDB database
+- Google Gemini API key
+- Cloudinary account for file storage
 
-
-| Directory/File | Responsibility |
-
-|---|---|
-
-| `config/` | Application configuration |
-
-| `controller/` | Request handling logic |
-
-| `cron/` | Scheduled jobs and reminders |
-
-| `middleware/` | Request processing and middleware |
-
-| `model/` | Database models |
-
-| `route/` | API route definitions |
-
-| `service/` | Supporting business logic |
-
-| `src/` | Additional application source code |
-
-| `index.js` | Main server entry point |
-
-| `package.json` | Dependencies and npm scripts |
-
-
-
-The exact responsibilities of individual files should be confirmed from their implementation.
-
-
-
-\## 🚀 Getting Started
-
-
-
-\### Prerequisites
-
-
-
-\- Node.js
-
-\- npm
-
-\- MongoDB Atlas account or an accessible MongoDB instance
-
-\- Git
-
-
-
-\### 1. Clone the Repository
-
-
+### 1. Clone the repository
 
 ```bash
-
 git clone https://github.com/sezanmathakiya/studymate-backend.git
-
-```
-
-
-
-\### 2. Enter the Project Directory
-
-
-
-```bash
-
 cd studymate-backend
-
 ```
 
-
-
-\### 3. Install Dependencies
-
-
+### 2. Install dependencies
 
 ```bash
-
 npm install
-
 ```
 
+### 3. Configure environment variables
 
+Create a `.env` file in the project root:
 
-\### 4. Configure Environment Variables
-
-
-
-Create a local `.env` file in the backend root directory and configure the variables required by the application.
-
-
-
-Check the actual source code to identify the required variable names.
-
-
-
-Do not commit `.env` or publish credentials in documentation, source code, screenshots, or logs.
-
-
-
-\### 5. Start the Development Server
-
-
-
-```bash
-
-npm run dev
-
+```env
+PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_strong_jwt_secret
+FRONTEND_URL=http://localhost:5173
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
+Configure any additional Cloudinary and email-related variables required by your project configuration.
 
+**Never commit `.env` files, API keys, database credentials, or JWT secrets to GitHub.**
 
-This command uses Nodemon to restart the server when code changes are detected.
-
-
-
-\### 6. Start the Application
-
-
+### 4. Start the server
 
 ```bash
-
 npm start
-
 ```
 
+The server uses `process.env.PORT` when available and falls back to port `3000`.
 
+### 5. Verify the API
 
-The application starts using `node index.js`.
+Open the backend root URL in your browser:
 
+```text
+http://localhost:3000/
+```
 
+The deployed API root is:
 
-Check the server logs to confirm that the server and database start successfully.
+https://studymate-backend-1-izz3.onrender.com
 
+The root endpoint should return a response indicating that the Student Study Management API is running.
 
+## 🔌 API Routes
 
-\## 🗄️ Database
+Base URL:
 
+```text
+/api
+```
 
+| Method | Endpoint | Description | Authentication |
+|---|---|---|---|
+| POST | `/api/user/...` | User authentication routes | Depends on route |
+| GET | `/api/subjects` | Retrieve authenticated user's subjects | Required |
+| POST | `/api/subjects/create` | Create a subject | Required |
+| PUT | `/api/subjects/:id` | Update an owned subject | Required |
+| DELETE | `/api/subjects/:id` | Delete an owned subject | Required |
+| GET | `/api/tasks` | Retrieve authenticated user's tasks | Required |
+| POST | `/api/tasks/create` | Create a task | Required |
+| GET | `/api/tasks/progress` | Overall task progress | Required |
+| GET | `/api/tasks/progress/subjects` | Subject-wise task progress | Required |
+| GET | `/api/tasks/activity` | Recent task activity | Required |
+| PUT | `/api/tasks/:id` | Update an owned task | Required |
+| DELETE | `/api/tasks/:id` | Delete an owned task | Required |
+| GET | `/api/files` | Retrieve authenticated user's files | Required |
+| POST | `/api/files/upload` | Upload a study file | Required |
+| DELETE | `/api/files/:id` | Delete an owned file | Required |
+| POST | `/api/ai` | Send a question to the AI assistant | Required |
 
-StudyMate uses MongoDB with Mongoose for database operations.
+*The exact signup/login paths and any additional routes are defined in the route files. Check those files before documenting the detailed authentication endpoints.*
 
+## 🔐 Authentication
 
+Protected endpoints use JWT-based authentication. Include a valid token in the request header:
 
-The backend requires a valid database connection configured through its environment variables.
+```http
+Authorization: Bearer YOUR_JWT_TOKEN
+```
 
+Requests without valid authentication are expected to be rejected by protected routes.
 
+## 🛡️ Security
 
-Keep database credentials private and ensure the database access rules are appropriately configured.
+The backend includes:
 
+- Password hashing with bcryptjs.
+- JWT authentication middleware.
+- User-scoped database queries for subjects, tasks, and files.
+- Input validation for relevant subject and task operations.
+- Rate limiting for API requests.
+- Helmet security headers.
+- CORS configuration through the `FRONTEND_URL` environment variable.
+- Environment-based configuration for secrets.
 
+Unauthenticated API checks and basic cross-account data visibility checks have been performed. These checks do not constitute a complete security audit.
 
-\## 🔐 Security
+## 🚀 Deployment
 
+The backend is deployed on Render.
 
+For deployment:
 
-The backend dependencies include tools for authentication, validation, HTTP security headers, and rate limiting.
+1. Connect the backend GitHub repository to Render.
+2. Set the build command to `npm install`.
+3. Set the start command to `npm start`.
+4. Configure the required environment variables in Render.
+5. Deploy the service and verify the backend root endpoint.
 
+## 👨‍💻 Author
 
+**Sezan Mathakiya**
 
-Recommended security practices:
-
-
-
-\- Hash passwords before storing them.
-
-\- Verify JWTs on protected routes.
-
-\- Authorize access to user-owned resources.
-
-\- Validate incoming request data.
-
-\- Apply rate limits to sensitive endpoints.
-
-\- Configure CORS for trusted frontend origins.
-
-\- Keep all credentials in environment variables.
-
-\- Never expose private credentials in frontend code or GitHub.
-
-\- Return safe error messages without leaking sensitive information.
-
-
-
-The presence of a security dependency does not automatically mean every endpoint is protected. Review the actual implementation.
-
-
-
-\## ☁️ Deployment
-
-
-
-The backend is deployed separately from the frontend on Render.
-
-
-
-Typical configuration:
-
-
-
-\- \*\*Runtime:\*\* Node.js
-
-\- \*\*Build/Install Command:\*\* `npm install`
-
-\- \*\*Start Command:\*\* `npm start`
-
-
-
-Configure the required environment variables in the Render service dashboard. The frontend must use the correct deployed backend API URL.
-
-
-
-Verify the actual Render service settings before changing deployment configuration.
-
-
-
-\## 🧪 Testing and Troubleshooting
-
-
-
-For local troubleshooting:
-
-
-
-1\. Check that the required environment variables are configured.
-
-2\. Confirm that the MongoDB connection succeeds.
-
-3\. Check the terminal for server startup errors.
-
-4\. Verify the frontend API URL and CORS configuration.
-
-5\. Test authentication, protected routes, database operations, uploads, and reminders.
-
-6\. Never publish secret values when sharing error logs.
-
-
-
-\## 🎯 Project Objective
-
-
-
-StudyMate demonstrates backend development concepts including REST API development, database integration, authentication, request validation, cloud file storage, scheduled jobs, and deployment.
-
-
-
-\## 👨‍💻 Developer
-
-
-
-\*\*Sezan Mathakiya\*\*
-
-
-
-MCA Student | Aspiring Backend Developer
-
-
+MCA Student | Node.js / Backend Developer
 
 GitHub: https://github.com/sezanmathakiya
 
+---
 
-
-\---
-
-
-
-\*\*StudyMate Backend — Powering the StudyMate student application.\*\*
-
+Built with Node.js, Express.js, MongoDB, and Google Gemini to help students organize their learning.
