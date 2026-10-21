@@ -11,6 +11,7 @@ import subjectRoutes from "./route/subject.route.js";
 import taskRoutes from "./route/task.route.js";
 import fileRoutes from "./route/file.route.js";
 import dashboardRoutes from "./route/dashboard.route.js";
+import aiRoutes from "./route/ai.route.js";
 
 import notFoundMiddleware from "./middleware/notFound.middleware.js";
 import errorMiddleware from "./middleware/error.middleware.js";
@@ -54,18 +55,18 @@ const authLimiter = rateLimit({
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: {
-    message:
-      "Too many authentication attempts. Please try again later.",
+    message: "Too many authentication attempts. Please try again later.",
   },
 });
 
-// Apply general rate limiter
+// General rate limiter
 app.use("/api/subjects", generalLimiter);
 app.use("/api/tasks", generalLimiter);
 app.use("/api/files", generalLimiter);
 app.use("/api/dashboard", generalLimiter);
+app.use("/api/ai", generalLimiter);
 
-// Apply authentication rate limiter
+// Authentication rate limiter
 app.use("/api/user", authLimiter);
 
 // ===============================
@@ -123,6 +124,7 @@ app.use("/api/subjects", subjectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/files", fileRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/ai", aiRoutes);
 
 // ===============================
 // HOME ROUTE
@@ -147,9 +149,7 @@ app.use(notFoundMiddleware);
 
 app.use(errorMiddleware);
 
-// ===============================
-// START SERVER
-// ===============================
+
 
 const startServer = async () => {
   try {
